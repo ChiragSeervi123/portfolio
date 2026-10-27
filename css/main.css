@@ -1,0 +1,375 @@
+/* =========================================================
+   Portfolio — Chirag Seervi
+   "Survey Log" theme. One stylesheet for every page.
+   ========================================================= */
+
+/* ---------- 1. Tokens ---------- */
+
+/* Dark is the default theme. */
+:root {
+  --bg:        #0a0e13;
+  --surface:   #0d1218;
+  --surface-2: #121a23;
+  --line:      #1d2733;
+  --line-2:    #253140;
+  --text:      #f2ede4;
+  --text-2:    #a9b4c0;
+  --muted:     #5b6b7c;
+  --accent:    #e8a33d;   /* amber */
+  --ok:        #5fd38d;   /* status green, used sparingly */
+  --todo:      #c2410c;   /* placeholder outline colour */
+
+  --serif: "Instrument Serif", Georgia, serif;
+  --sans:  "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:  "JetBrains Mono", ui-monospace, Consolas, monospace;
+
+  --max:     1120px;  /* widest content */
+  --column:  760px;   /* reading column on case-study pages */
+  --gutter:  16px;    /* side padding on phones */
+  --section: 64px;    /* space between sections on phones */
+  --bar-h:   56px;    /* height of the top bar */
+
+  --fast: 150ms ease-out;
+  --slow: 300ms ease-out;
+}
+
+[data-theme="light"] {
+  --bg:        #f4efe6;
+  --surface:   #fbf8f2;
+  --surface-2: #efe8dc;
+  --line:      #ddd3c3;
+  --line-2:    #cbbfac;
+  --text:      #161b21;
+  --text-2:    #46505b;
+  --muted:     #7a838d;
+  --accent:    #b86e0f;
+  --ok:        #1f8a4c;
+  --todo:      #c2410c;
+}
+
+/* With JavaScript off there is no data-theme attribute,
+   so follow the system setting instead. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    --bg:        #f4efe6;
+    --surface:   #fbf8f2;
+    --surface-2: #efe8dc;
+    --line:      #ddd3c3;
+    --line-2:    #cbbfac;
+    --text:      #161b21;
+    --text-2:    #46505b;
+    --muted:     #7a838d;
+    --accent:    #b86e0f;
+    --ok:        #1f8a4c;
+  }
+}
+
+@media (min-width: 720px) {
+  :root {
+    --gutter:  24px;
+    --section: 112px;
+  }
+}
+
+/* ---------- 2. Base ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--bar-h) + 16px); /* anchors land below the sticky bar */
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+@media (min-width: 720px) {
+  body { font-size: 17px; }
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+h1, h2, h3 {
+  margin: 0;
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+a {
+  color: var(--text);
+  text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+  transition: color var(--fast);
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* One visible amber focus ring for everything you can Tab to. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--gutter);
+  top: -100px;
+  z-index: 100;
+  padding: 8px 12px;
+  background: var(--accent);
+  color: var(--bg);
+  font-family: var(--mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 8px;
+}
+
+.wrap {
+  max-width: calc(var(--max) + 2 * var(--gutter));
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* Small uppercase mono text used for labels, numbers and tech lines. */
+.label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+}
+
+/* ---------- 3. Sections ---------- */
+
+.section {
+  padding: var(--section) 0 0;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 32px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line-2);
+}
+
+.section-head h2 {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+}
+
+/* ---------- 4. Top bar ---------- */
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+
+.topbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--bar-h);
+}
+
+.monogram {
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--accent);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.site-nav ul {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-nav a {
+  font-family: var(--mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-2);
+  text-decoration: none;
+}
+
+.site-nav a:hover,
+.site-nav a.is-active {
+  color: var(--accent);
+}
+
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  background: none;
+  border: 1px solid var(--line-2);
+  color: var(--text-2);
+  transition: border-color var(--fast), color var(--fast);
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.theme-toggle svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Show the sun in dark mode (click for light) and the moon in light mode. */
+.icon-moon,
+[data-theme="light"] .icon-sun {
+  display: none;
+}
+
+[data-theme="light"] .icon-moon {
+  display: block;
+}
+
+/* The toggle needs JavaScript, so hide it when JavaScript is off. */
+html:not(.js) .theme-toggle {
+  display: none;
+}
+
+.menu-btn {
+  display: none;
+  padding: 6px 12px;
+  background: none;
+  border: 1px solid var(--line-2);
+  font-family: var(--mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+/* Below 720px the nav collapses behind the menu button (only when JS can open it). */
+@media (max-width: 719px) {
+  .js .menu-btn {
+    display: block;
+  }
+
+  .js .site-nav {
+    display: none;
+    position: absolute;
+    top: var(--bar-h);
+    left: 0;
+    right: 0;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line-2);
+  }
+
+  .js .site-nav.is-open {
+    display: block;
+  }
+
+  .js .site-nav ul {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    padding: 8px var(--gutter) 16px;
+  }
+
+  .js .site-nav li {
+    width: 100%;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .js .site-nav li:last-child {
+    border-bottom: 0;
+  }
+
+  /* Without JS the links simply wrap onto the bar. */
+  html:not(.js) .topbar-inner {
+    height: auto;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  html:not(.js) .site-nav ul {
+    flex-wrap: wrap;
+    gap: 8px 16px;
+  }
+}
+
+/* ---------- 5. Footer ---------- */
+
+.site-footer {
+  margin-top: var(--section);
+  border-top: 1px solid var(--line);
+}
+
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding-top: 24px;
+  padding-bottom: 32px;
+}
+
+.footer-inner a {
+  text-decoration: none;
+}
+
+.footer-inner a:hover {
+  color: var(--accent);
+}
