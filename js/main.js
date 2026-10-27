@@ -58,6 +58,55 @@ if (menuButton && siteNav) {
   });
 }
 
+/* ---------- Copy email ---------- */
+
+// Older fallback for browsers where navigator.clipboard isn't available.
+function copyWithTextarea(text) {
+  var box = document.createElement("textarea");
+  box.value = text;
+  box.setAttribute("readonly", "");
+  box.style.position = "absolute";
+  box.style.left = "-9999px";
+  document.body.appendChild(box);
+  box.select();
+  var ok = false;
+  try {
+    ok = document.execCommand("copy");
+  } catch (e) {
+    ok = false;
+  }
+  document.body.removeChild(box);
+  return ok;
+}
+
+function showCopied(button, status) {
+  button.textContent = "Copied";
+  if (status) status.textContent = "Email copied to clipboard";
+  setTimeout(function () {
+    button.textContent = "Copy";
+    if (status) status.textContent = "";
+  }, 1500);
+}
+
+var copyButtons = document.querySelectorAll(".btn-copy");
+for (var c = 0; c < copyButtons.length; c++) {
+  copyButtons[c].addEventListener("click", function () {
+    var button = this;
+    var text = button.getAttribute("data-copy");
+    var status = button.parentNode.querySelector(".copy-status");
+    if (!text) return;
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(
+        function () { showCopied(button, status); },
+        function () { if (copyWithTextarea(text)) showCopied(button, status); }
+      );
+    } else if (copyWithTextarea(text)) {
+      showCopied(button, status);
+    }
+  });
+}
+
 /* ---------- Footer year ---------- */
 
 var yearSpans = document.querySelectorAll(".year");

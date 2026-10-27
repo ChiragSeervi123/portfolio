@@ -373,3 +373,446 @@ html:not(.js) .theme-toggle {
 .footer-inner a:hover {
   color: var(--accent);
 }
+
+/* ---------- 6. Buttons, badges, placeholders ---------- */
+
+.btn {
+  display: inline-block;
+  padding: 12px 20px;
+  border: 1px solid var(--accent);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  text-decoration: none;
+  transition: background-color var(--fast), color var(--fast), border-color var(--fast);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.btn-primary:hover {
+  background: transparent;
+  color: var(--accent);
+}
+
+.btn-ghost {
+  color: var(--text);
+  border-color: var(--line-2);
+}
+
+.btn-ghost:hover {
+  border-color: var(--accent);
+}
+
+.badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border: 1px solid var(--line-2);
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+/* Anything Chirag still has to fill in. Search the code for data-todo to find them all. */
+.todo {
+  display: inline-block;
+  padding: 2px 8px;
+  border: 1px dashed var(--todo);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-style: normal;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+  color: var(--text-2);
+}
+
+.todo-block {
+  display: block;
+  padding: 12px 16px;
+}
+
+/* ---------- 7. Hero ---------- */
+
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: min(calc(100vh - var(--bar-h)), 760px);
+  padding: 88px 0;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+  /* A faint 40px survey grid, behind the hero only. */
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: center center;
+}
+
+.hero-inner {
+  position: relative; /* sits above the canvas */
+  width: 100%;
+}
+
+.hero-corner {
+  position: absolute;
+  font-size: 10px;
+}
+
+.hero-tl { top: 20px; left: var(--gutter); }
+.hero-tr { top: 20px; right: var(--gutter); }
+.hero-bl { bottom: 20px; left: var(--gutter); }
+.hero-br { bottom: 20px; right: var(--gutter); }
+
+/* On small phones the corner labels stack on the left instead of sharing a row. */
+@media (max-width: 479px) {
+  .hero-tr { top: 40px; right: auto; left: var(--gutter); }
+  .hero-br { bottom: 40px; right: auto; left: var(--gutter); }
+}
+
+.hero-role {
+  margin-bottom: 16px;
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--text-2);
+}
+
+.hero-name {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(56px, 13vw, 132px);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+}
+
+.hero-rule {
+  display: block;
+  width: 120px;
+  height: 2px;
+  margin: 28px 0 20px;
+  background: var(--accent);
+}
+
+.hero-tagline {
+  max-width: 32ch;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(22px, 3.4vw, 30px);
+  line-height: 1.3;
+  color: var(--text-2);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 36px;
+}
+
+/* ---------- 8. About: field-notes card ---------- */
+
+.fieldnotes {
+  display: grid;
+  gap: 24px;
+  padding: 24px;
+  border: 1px solid var(--line-2);
+  background: var(--surface);
+}
+
+@media (min-width: 720px) {
+  .fieldnotes {
+    grid-template-columns: 200px 1fr;
+    gap: 40px;
+    padding: 32px;
+  }
+}
+
+.portrait {
+  display: grid;
+  place-items: center;
+  width: 160px;
+  aspect-ratio: 1;
+  border: 1px solid var(--line-2);
+  background: var(--surface-2);
+}
+
+@media (min-width: 720px) {
+  .portrait { width: 100%; }
+}
+
+.portrait img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.portrait-mono {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 64px;
+  color: var(--accent);
+}
+
+/* Field: mono label on top, serif value below. */
+.fields {
+  display: grid;
+  gap: 20px 32px;
+  margin: 0 0 24px;
+}
+
+@media (min-width: 560px) {
+  .fields { grid-template-columns: 1fr 1fr; }
+}
+
+.field dt {
+  margin-bottom: 4px;
+}
+
+.field dd {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.25;
+}
+
+/* ---------- 9. Project cards ---------- */
+
+.cards {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cards li + li {
+  margin-top: -1px; /* neighbouring borders overlap into a single line */
+}
+
+.card {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 60px 1fr;
+  grid-template-areas:
+    "no   glyph ."
+    "body body  body"
+    "meta meta  meta";
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  border: 1px solid var(--line-2);
+  background: var(--surface);
+  color: var(--text);
+  text-decoration: none;
+  transition: border-color var(--slow);
+}
+
+@media (min-width: 860px) {
+  .card {
+    grid-template-columns: 40px 60px 1fr auto;
+    grid-template-areas: "no glyph body meta";
+    gap: 28px;
+    padding: 28px;
+  }
+}
+
+.card:hover,
+.card:focus-visible {
+  z-index: 1; /* keep the amber border on top of the neighbours */
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.card-no    { grid-area: no; }
+.card-glyph { grid-area: glyph; }
+.card-body  { grid-area: body; display: block; }
+.card-meta  { grid-area: meta; }
+
+.card-glyph {
+  display: block;
+  width: 60px;
+  height: 50px;
+  color: var(--accent);
+}
+
+.card-glyph svg {
+  display: block;
+  width: 60px;
+  height: 50px;
+}
+
+.card-glyph .water {
+  fill: var(--accent);
+  stroke: none;
+  opacity: 0.25;
+}
+
+.card-glyph .dot-ok {
+  fill: var(--ok);
+  stroke: none;
+}
+
+.card-glyph .candle-up {
+  fill: currentColor;
+}
+
+.card-name {
+  display: block;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 32px;
+  line-height: 1.1;
+}
+
+.card-line {
+  display: block;
+  margin: 6px 0 10px;
+  color: var(--text-2);
+}
+
+.card-tech {
+  display: block;
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+}
+
+.card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 20px;
+}
+
+@media (min-width: 860px) {
+  .card-meta {
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+  }
+}
+
+.card-view {
+  font-family: var(--mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.card-view .arrow {
+  display: inline-block;
+  transition: transform var(--fast);
+}
+
+/* ---------- 10. Skills ---------- */
+
+.skills {
+  display: grid;
+  gap: 32px;
+}
+
+@media (min-width: 720px) {
+  .skills {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px 32px;
+  }
+}
+
+.skill-group h3 {
+  margin-bottom: 12px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tags li {
+  padding: 4px 10px;
+  border: 1px solid var(--line-2);
+  font-size: 14px;
+  color: var(--text);
+}
+
+.skill-note {
+  margin: 10px 0 0;
+  font-size: 13px;
+  color: var(--text-2);
+}
+
+/* ---------- 11. Contact ---------- */
+
+.contact-lead {
+  margin-bottom: 32px;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.2;
+}
+
+.contact-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line-2);
+}
+
+.contact-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line-2);
+}
+
+.contact-list .label {
+  width: 100px;
+  flex-shrink: 0;
+}
+
+.btn-copy {
+  padding: 4px 12px;
+  background: none;
+  border: 1px solid var(--line-2);
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  transition: border-color var(--fast), color var(--fast);
+}
+
+.btn-copy:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn-copy:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.copy-status {
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--ok);
+}

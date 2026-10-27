@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SME Pulse · Chirag Seervi</title>
+  <script>
+    (function () {
+      var theme = null;
+      try { theme = localStorage.getItem("theme"); } catch (e) {}
+      if (theme !== "light" && theme !== "dark") {
+        theme = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      }
+      document.documentElement.setAttribute("data-theme", theme);
+      document.documentElement.classList.add("js");
+    })();
+  </script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+  <main id="main" class="wrap section">
+    <p class="label">Entry 04</p>
+    <h1 class="hero-name">SME Pulse</h1>
+    <p class="todo todo-block" data-todo="sme-pulse: page">TODO: case study coming in the next stage.</p>
+    <p><a href="../index.html#projects">← All projects</a></p>
+  </main>
+</body>
+</html>
