@@ -5,7 +5,10 @@
 
 /* ---------- 1. Tokens ---------- */
 
-/* Dark is the default theme. */
+/* Dark is the default theme.
+   --muted (both themes), and --accent and --ok in the light theme, are a
+   touch darker/lighter than the original spec values so that text in
+   those colours reaches the 4.5:1 contrast the spec also requires. */
 :root {
   --bg:        #0a0e13;
   --surface:   #0d1218;
@@ -14,7 +17,7 @@
   --line-2:    #253140;
   --text:      #f2ede4;
   --text-2:    #a9b4c0;
-  --muted:     #5b6b7c;
+  --muted:     #6f7f90;   /* spec: #5b6b7c (3.5:1) */
   --accent:    #e8a33d;   /* amber */
   --ok:        #5fd38d;   /* status green, used sparingly */
   --todo:      #c2410c;   /* placeholder outline colour */
@@ -41,9 +44,9 @@
   --line-2:    #cbbfac;
   --text:      #161b21;
   --text-2:    #46505b;
-  --muted:     #7a838d;
-  --accent:    #b86e0f;
-  --ok:        #1f8a4c;
+  --muted:     #646c75;   /* spec: #7a838d (3.3:1) */
+  --accent:    #9a5b0b;   /* spec: #b86e0f (3.5:1) */
+  --ok:        #18703d;   /* spec: #1f8a4c (3.8:1) */
   --todo:      #c2410c;
 }
 
@@ -58,9 +61,9 @@
     --line-2:    #cbbfac;
     --text:      #161b21;
     --text-2:    #46505b;
-    --muted:     #7a838d;
-    --accent:    #b86e0f;
-    --ok:        #1f8a4c;
+    --muted:     #646c75;
+    --accent:    #9a5b0b;
+    --ok:        #18703d;
   }
 }
 
