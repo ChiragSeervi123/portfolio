@@ -3,8 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ReturnLoop · Chirag Seervi</title>
+  <title>ReturnLoop · Returns and reverse logistics · Chirag Seervi</title>
+  <meta name="description" content="ReturnLoop: a returns desk built with Flask. Pickup, QC grade A/B/C, restock, refurbish or scrap, and a refund worked out to the rupee.">
+
   <script>
+    // Pick the theme before the page draws: saved choice, else the system setting.
     (function () {
       var theme = null;
       try { theme = localStorage.getItem("theme"); } catch (e) {}
@@ -15,15 +18,282 @@
       document.documentElement.classList.add("js");
     })();
   </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap">
   <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
-  <main id="main" class="wrap section">
-    <p class="label">Entry 03</p>
-    <h1 class="hero-name">ReturnLoop</h1>
-    <p class="todo todo-block" data-todo="returnloop: page">TODO: case study coming in the next stage.</p>
-    <p><a href="../index.html#projects">← All projects</a></p>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="monogram" href="../index.html" aria-label="Chirag Seervi, home">CS</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="../index.html#projects">Projects</a></li>
+          <li><a href="../index.html#about">About</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+          <li>
+            <button class="theme-toggle" type="button" aria-label="Switch theme">
+              <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <circle cx="12" cy="12" r="4"/>
+                <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+              </svg>
+              <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/>
+              </svg>
+            </button>
+          </li>
+          <li><a href="../assets/resume_chirag.pdf">Résumé ↗</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <article>
+
+      <!-- ===== Header block ===== -->
+      <header class="wrap case-head">
+        <div class="col">
+          <a class="back-link label" href="../index.html#projects">← All projects</a>
+          <p class="label case-no">Entry 03</p>
+          <h1 class="case-name">ReturnLoop</h1>
+          <p class="case-line">A returns desk: pickup, QC grade A/B/C, restock or refurbish, refund to the rupee.</p>
+          <div class="case-badges"><span class="badge">Software Engineering · Course project</span></div>
+          <p class="case-tech">Python · Flask (Blueprints) · SQLite via SQLAlchemy · Jinja2 · Vanilla JS · Three.js · GSAP · Chart.js · pytest</p>
+          <div class="case-actions">
+            <a class="btn btn-primary" href="https://github.com/ChiragSeervi123/Return-Loop">Code ↗</a>
+            <!-- No working live demo yet, so there is no "Live demo" button. -->
+          </div>
+        </div>
+      </header>
+
+      <!-- ===== At a glance ===== -->
+      <section class="wrap case-section" aria-labelledby="glance-h">
+        <div class="col">
+          <div class="section-head"><h2 id="glance-h">At a glance</h2></div>
+          <dl class="glance">
+            <div>
+              <dt class="label">Context</dt>
+              <dd>Software Engineering course project</dd>
+            </div>
+            <div>
+              <dt class="label">Team</dt>
+              <dd>4 people</dd>
+            </div>
+            <div>
+              <dt class="label">My role</dt>
+              <dd><span class="todo" data-todo="returnloop: role (short)">TODO: role</span></dd>
+            </div>
+            <div>
+              <dt class="label">Status</dt>
+              <dd><span class="todo" data-todo="returnloop: status">TODO: status</span></dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <!-- ===== The problem ===== -->
+      <section class="wrap case-section" aria-labelledby="problem-h">
+        <div class="col">
+          <div class="section-head"><h2 id="problem-h">The problem</h2></div>
+          <p>Most returned goods get refunded and written off. ReturnLoop grades every item at quality check and routes it to restock, refurbish or scrap, so value is recovered and every status change is on record.</p>
+          <p>It models the whole reverse-logistics loop of an e-commerce business. A customer asks to return an item, an agent picks it up, the warehouse checks it in, QC grades it, and the item is restocked, refurbished or scrapped. Then the refund is worked out to the rupee.</p>
+        </div>
+      </section>
+
+      <!-- ===== What it does ===== -->
+      <section class="wrap case-section" aria-labelledby="does-h">
+        <div class="col">
+          <div class="section-head"><h2 id="does-h">What it does</h2></div>
+          <ul class="bullets">
+            <li>One app with six roles: customer, pickup agent, warehouse, QC inspector, refurbisher and admin, each with their own pages. After each step a handoff card passes the return to the next desk.</li>
+            <li>Return flow: request → pickup → warehouse check-in → QC grade A/B/C → restock, refurbish (then re-inspection) or scrap → refund.</li>
+            <li>Business rules kept in one config file: a 7-day return window; a refund of 100% for grade A, 70% for grade B once the repair passes re-inspection, and 0% for grade C; a ₹50 pickup fee only for “Changed my mind”; and a flag on customers with more than 3 return requests in 30 days, shown to the admin but never blocking the customer.</li>
+            <li>One state machine controls every status change and writes a history row each time, so every item has a full audit trail. The refund, the inventory log and the final status are saved in one transaction, so a second refund is impossible.</li>
+            <li>An animated QC “stamp” when an item is graded: the stamp slams down and the screen shakes (skipped with reduced motion).</li>
+            <li>An admin dashboard with Chart.js charts of return reasons and grades, and the list of frequent returners.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ===== How it works ===== -->
+      <section class="wrap case-section" aria-labelledby="how-h">
+        <div class="col">
+          <div class="section-head"><h2 id="how-h">How it works</h2></div>
+        </div>
+
+        <figure class="pipeline">
+          <svg viewBox="0 0 1040 262" role="img" aria-labelledby="pipe-title pipe-desc">
+            <title id="pipe-title">ReturnLoop status flow</title>
+            <desc id="pipe-desc">Requested, then pickup, then received at the warehouse, then QC grade. Grade A is restocked with a 100 percent refund. Grade B goes to refurbishing and re-inspection: a pass is restocked with 70 percent, a fail is scrapped with 0 percent. Grade C is scrapped with 0 percent. All three branches end in refund issued.</desc>
+            <defs>
+              <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                <path class="arrowhead" d="M0 0 L10 5 L0 10 Z"/>
+              </marker>
+            </defs>
+
+            <!-- Main line: Requested → Pickup → Received → QC grade -->
+            <rect class="box" x="0.5" y="96" width="130" height="70"/>
+            <text class="t" x="12" y="120">REQUESTED</text>
+            <text class="s" x="12" y="141">7-day window</text>
+            <text class="s" x="12" y="157">checked</text>
+
+            <rect class="box" x="165.5" y="96" width="130" height="70"/>
+            <text class="t" x="177" y="120">PICKUP</text>
+            <text class="s" x="177" y="141">scheduled,</text>
+            <text class="s" x="177" y="157">picked up</text>
+
+            <rect class="box" x="330.5" y="96" width="130" height="70"/>
+            <text class="t" x="342" y="120">RECEIVED</text>
+            <text class="s" x="342" y="141">checked in at</text>
+            <text class="s" x="342" y="157">the warehouse</text>
+
+            <rect class="box" x="495.5" y="96" width="130" height="70"/>
+            <text class="t" x="507" y="120">QC GRADE</text>
+            <text class="s" x="507" y="141">A / B / C,</text>
+            <text class="s" x="507" y="157">stamped</text>
+
+            <!-- Branches -->
+            <rect class="box" x="680.5" y="8" width="170" height="60"/>
+            <text class="t" x="692" y="32">A · RESTOCKED</text>
+            <text class="s" x="692" y="53">refund 100%</text>
+
+            <rect class="box" x="680.5" y="86" width="170" height="90"/>
+            <text class="t" x="692" y="109">B · REFURBISHING</text>
+            <text class="s" x="692" y="130">then re-inspection</text>
+            <text class="s" x="692" y="147">pass: restock, 70%</text>
+            <text class="s" x="692" y="164">fail: scrap, 0%</text>
+
+            <rect class="box" x="680.5" y="194" width="170" height="60"/>
+            <text class="t" x="692" y="218">C · SCRAPPED</text>
+            <text class="s" x="692" y="239">refund 0%</text>
+
+            <!-- End -->
+            <rect class="box" x="900.5" y="88" width="138" height="86"/>
+            <text class="t" x="912" y="111">REFUND ISSUED</text>
+            <text class="s" x="912" y="132">base × grade %</text>
+            <text class="s" x="912" y="149">− pickup fee,</text>
+            <text class="s" x="912" y="166">then closed</text>
+
+            <!-- Arrows along the main line -->
+            <path class="arrow" d="M133 131 H161" marker-end="url(#ah)"/>
+            <path class="arrow" d="M298 131 H326" marker-end="url(#ah)"/>
+            <path class="arrow" d="M463 131 H491" marker-end="url(#ah)"/>
+
+            <!-- QC grade fans out to A, B, C -->
+            <path class="arrow" d="M628 131 H652 V38 H676" marker-end="url(#ah)"/>
+            <path class="arrow" d="M652 131 H676" marker-end="url(#ah)"/>
+            <path class="arrow" d="M652 131 V224 H676" marker-end="url(#ah)"/>
+
+            <!-- A, B, C join at the refund -->
+            <path class="arrow" d="M853 38 H876 V131"/>
+            <path class="arrow" d="M853 224 H876 V131"/>
+            <path class="arrow" d="M853 131 H896" marker-end="url(#ah)"/>
+          </svg>
+        </figure>
+        <p class="col label scroll-hint">Scroll the diagram sideways →</p>
+
+        <div class="col">
+          <p>Every move on this diagram goes through one function, <code>change_status()</code>. It checks the move against a transition table, writes a status-history row and updates the timestamp. Two side exits exist too: a return is <em>Rejected</em> as suspected fraud when QC finds the item doesn't match the order (unless the customer's reason was “Wrong item”), and <em>Cancelled</em> when the customer misses the pickup twice.</p>
+          <p>The app is Flask split into Blueprints, one per role plus a small JSON API. All business logic lives in <code>services/</code>, so the route handlers stay thin. Data is stored in SQLite through Flask-SQLAlchemy. Pages are Jinja2 templates with plain CSS and vanilla JavaScript: Three.js draws the 3D scenes, GSAP drives the landing-page scroll and Chart.js draws the admin charts. There is no npm and no build step.</p>
+          <p>The UML diagrams map straight onto the code: the use-case actors are the six roles, the state diagram is the state machine, the class diagram is the database tables, and the swimlane is the desk-to-desk relay.</p>
+        </div>
+      </section>
+
+      <!-- ===== Screenshots ===== -->
+      <!-- Drop PNGs into assets/shots/ as returnloop-1.png, returnloop-2.png, returnloop-3.png.
+           Screenshot 1 shows a placeholder when missing; 2 and 3 simply disappear when missing. -->
+      <section class="wrap case-section" aria-labelledby="shots-h">
+        <div class="col">
+          <div class="section-head"><h2 id="shots-h">Screenshots</h2></div>
+        </div>
+        <div class="shots">
+          <figure class="shot">
+            <img src="../assets/shots/returnloop-1.png" alt="ReturnLoop customer tracking page" width="1600" height="1000" loading="lazy"
+                 onerror="this.parentNode.classList.add('is-missing')">
+            <div class="shot-ph" data-todo="returnloop: screenshot 1">[screenshot pending]</div>
+            <figcaption>Tracking a return</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="../assets/shots/returnloop-2.png" alt="ReturnLoop QC inspection form with the grade stamp" width="1600" height="1000" loading="lazy"
+                 onerror="this.parentNode.remove()">
+            <figcaption>QC inspection</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="../assets/shots/returnloop-3.png" alt="ReturnLoop admin dashboard" width="1600" height="1000" loading="lazy"
+                 onerror="this.parentNode.remove()">
+            <figcaption>Admin dashboard</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- ===== Evidence ===== -->
+      <section class="wrap case-section" aria-labelledby="evidence-h">
+        <div class="col">
+          <div class="section-head"><h2 id="evidence-h">Evidence</h2></div>
+          <ul class="stats">
+            <li>
+              <span class="stat-value"><span class="todo" data-todo="returnloop: test count">TODO: test count</span></span>
+              <span class="stat-label">Automated tests passing (pytest). Run <code>python -m pytest</code> in the repo and enter the number. Earlier notes said 85; a read of the test files suggests about 104. Not yet verified.</span>
+            </li>
+            <li>
+              <span class="stat-value">13 statuses</span>
+              <span class="stat-label">In the return state machine, with every move checked against one transition table</span>
+            </li>
+            <li>
+              <span class="stat-value">11 tables</span>
+              <span class="stat-label">In the database model, which the UML class diagram maps onto</span>
+            </li>
+            <li>
+              <span class="stat-value">18 slides</span>
+              <span class="stat-label">In the built-in software-engineering deck: planning, requirements and the UML diagrams</span>
+            </li>
+          </ul>
+          <p class="source-line">Counts taken from the repo's code and its <code>docs/UML_MAPPING.md</code>.</p>
+        </div>
+      </section>
+
+      <!-- ===== My role ===== -->
+      <section class="wrap case-section" aria-labelledby="role-h">
+        <div class="col">
+          <div class="section-head"><h2 id="role-h">My role</h2></div>
+          <div class="role-todo" data-todo="returnloop: my role">
+            <strong>TODO: My role, written by Chirag</strong>
+            <p>Team of four. What did you build, decide or own? Name the parts of the code or the work that were yours.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== Prev / next ===== -->
+      <nav class="wrap" aria-label="More projects">
+        <div class="col pager">
+          <a href="cascade.html">
+            <span class="label">← Prev · 02</span>
+            <span class="pager-name">Cascade</span>
+          </a>
+          <a href="sme-pulse.html">
+            <span class="label">Next · 04 →</span>
+            <span class="pager-name">SME Pulse</span>
+          </a>
+        </div>
+      </nav>
+
+    </article>
   </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span class="label">End of log · More sites under survey</span>
+      <a class="label" href="https://github.com/ChiragSeervi123">github.com/ChiragSeervi123</a>
+      <span class="label">© <span class="year">2026</span></span>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
 </body>
 </html>
